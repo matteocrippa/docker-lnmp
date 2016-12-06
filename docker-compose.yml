@@ -33,27 +33,22 @@ fpm:
     # - DB_USERNAME=
     # - DB_PASSWORD=
   links:
-    - mysql:mysql
+    - db:mysql
 
 # database
-mysql:
-  image: mysql:latest
-  ports:
-    # Allow client to access 3306
-    - "3306:3306"
-  volumes:
-    # NOTE: your data will be stored in ./mysql
-    - ./mysql:/var/lib/mysql
+db:
+  image: mariadb
   environment:
-    - MYSQL_ROOT_PASSWORD=your_mysql_password
-    
+   - MYSQL_ROOT_PASSWORD=change_this_pass
+   
 
 # phpmyadmin
 phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    links:
-      - mysql:db
-    ports:
-      - "8181:80"
-    environment:
-      - MYSQL_USERNAME=root
+  image: corbinu/docker-phpmyadmin
+  links:
+    - db:mysql
+  ports:
+    - 8181:80
+  environment:
+    - MYSQL_USERNAME=root
+    - MYSQL_ROOT_PASSWORD=change_this_pass
