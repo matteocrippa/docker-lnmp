@@ -52,7 +52,7 @@ mysql:
 phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
-      - db:mysql
+      - mysql:db
     ports:
       - "8181:80"
     environment:
