@@ -52,9 +52,8 @@ mysql:
 phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
-      - mysql:mysql
+      - db:mysql
     ports:
       - "8181:80"
     environment:
       - MYSQL_USERNAME=root
-      - MYSQL_ROOT_PASSWORD=your_mysql_password
